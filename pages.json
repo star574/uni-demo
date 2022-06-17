@@ -31,10 +31,10 @@
 		// 顶部文本颜色
 		"navigationBarTextStyle": "white",
 		// 顶部文本
-		"navigationBarTitleText": "黑马优购",
+		"navigationBarTitleText": "优购",
 		// 顶部背景颜色
 		"navigationBarBackgroundColor": "#c00000",
-		
+
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
 			"background": "#efeff4"
