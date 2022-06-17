@@ -27,6 +27,19 @@
 		}
 
 	}],
+	// 分包配置
+	"subPackages": [{
+		"root": "subpkg",
+		"pages": [{
+			"path": "goods_detail/goods_detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}]
+	}],
+
 	"globalStyle": {
 		// 顶部文本颜色
 		"navigationBarTextStyle": "white",
