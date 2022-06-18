@@ -16,6 +16,28 @@
 				<image :src="item.image_src" mode=""></image>
 			</view>
 		</view>
+
+		<!-- 楼层标题 -->
+		<view class="floor">
+			<view v-for="(item,index) in floorList" :key="index" class="floor-item">
+				<!-- 标题 -->
+				<image :src="item.floor_title.image_src" class="floor-title"></image>
+				<view class="floor-img-box">
+					<!-- 大图 -->
+					<navigator class="floor-left-img-box" :url="item.product_list[0].url">
+						<image :src="item.product_list[0].image_src"
+							:style="'width:'+item.product_list[0].image_width+'rpx'" mode="widthFix"></image>
+					</navigator>
+					<!-- 小图 -->
+					<view class="floor-right-img-box">
+						<navigator class="floor-right-img-box-item" v-for="(product,i) in item.product_list" :key="i" :url="product.url">
+							<image :src="product.image_src" v-if="i!==0" :style="'width:'+product.image_width+'rpx'"
+								mode="widthFix"></image>
+						</navigator>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -24,12 +46,17 @@
 		data() {
 			return {
 				swiperList: [],
-				navList: []
+				navList: [],
+				floorList: [],
 			};
 		},
 		onLoad() {
+			// 轮播图
 			this.getSwiperList()
+			// Nav
 			this.getNavList()
+			// 楼层数据
+			this.getFloorList()
 		},
 		methods: {
 			// 获取轮播图
@@ -38,9 +65,7 @@
 				const {
 					data: res
 				} = await uni.$http.get('/api/public/v1/home/swiperdata')
-
 				if (res.meta.status !== 200) return uni.$showMsg("轮播图加载失败")
-
 				this.swiperList = res.message
 			},
 			// 获取图标
@@ -58,7 +83,20 @@
 						url: '/pages/cate/cate'
 					})
 				}
-			}
+			},
+			// 获取楼层数据
+			async getFloorList() {
+				const {
+					data: res
+				} = await uni.$http.get('/api/public/v1/home/floordata')
+				if (res.meta.status !== 200) return uni.$showMsg("楼层数据加载失败")
+				res.message.forEach(floor => {
+					floor.product_list.forEach(prod => {
+						prod.url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1]
+					})
+				})
+				this.floorList = res.message
+			},
 		},
 	}
 </script>
@@ -86,5 +124,36 @@
 				height: 140rpx;
 			}
 		}
+	}
+
+	.floor {
+		.floor-item {
+			.floor-title {
+				width: 100vw;
+				height: 60rpx;
+			}
+
+			.floor-img-box {
+				width: 100%;
+				display: flex;
+				padding-left: 10rpx;
+
+				.floor-left-img-box {
+					height: 100%;
+					flex: 1
+				}
+
+				.floor-right-img-box {
+					height: 100%;
+					flex: 2;
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: space-around;
+
+					.floor-right-img-box-item {}
+				}
+			}
+		}
+
 	}
 </style>

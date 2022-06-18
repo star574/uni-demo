@@ -22,9 +22,8 @@
 			if (this.$route.query.goods_id) {
 				this.goods.id = this.$route.query.goods_id
 			} else {
-				
+				uni.$back()
 			}
-			uni.$back()
 		}
 	}
 </script>
