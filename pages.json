@@ -8,7 +8,6 @@
 	}, {
 		"path": "pages/cate/cate",
 		"style": {
-			"navigationBarTitleText": "",
 			"enablePullDownRefresh": false
 		}
 
