@@ -137,7 +137,7 @@
 					flex-direction: column;
 					align-items: center;
 					margin-bottom: 10rpx;
-
+					font-size: 20rpx;
 					image {
 						width: 120rpx;
 					}

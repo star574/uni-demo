@@ -30,7 +30,8 @@
 					</navigator>
 					<!-- 小图 -->
 					<view class="floor-right-img-box">
-						<navigator class="floor-right-img-box-item" v-for="(product,i) in item.product_list" :key="i" :url="product.url">
+						<navigator class="floor-right-img-box-item" v-for="(product,i) in item.product_list" :key="i"
+							:url="product.url">
 							<image :src="product.image_src" v-if="i!==0" :style="'width:'+product.image_width+'rpx'"
 								mode="widthFix"></image>
 						</navigator>
@@ -149,8 +150,7 @@
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: space-around;
-
-					.floor-right-img-box-item {}
+					padding-right: 20rpx;
 				}
 			}
 		}
